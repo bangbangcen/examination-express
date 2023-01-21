@@ -31,6 +31,6 @@ router.put('/update/:id', async function(req, res) {
 router.post('/page', async function(req, res) {
   const result = await User.page(req.body);
   res.send(result.rows);
-})
+});
 
 module.exports = router;

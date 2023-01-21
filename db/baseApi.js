@@ -1,6 +1,6 @@
 const db = require("./connector");
 const { COLUMNS, COLUMN_QUERY_TYPE } = require("./constants");
-const { camelToUnderline, underlineToPascal } = require("../util");
+const { camelToUnderline, underlineToPascal, getPosListStr, getCurTime } = require("../util");
 
 // 将常用单表sql封装成api，传入参数可自动拼接生成sql
 class BaseApi {
@@ -16,17 +16,19 @@ class BaseApi {
       const value = entity[column];
       let val;
       if (column === "create_time") {
-        val = "CURRENT_TIMESTAMP";
+        val = getCurTime();
       } else if (value === void 0) {
-        val = "null";
+        val = null;
       } else {
-        // 若字段值不为空，只有字符串、数字两种类型
-        if (typeof value === "string") {
-          val = `'${value}'`;
-        }
+        val = value;
       }
       return [column, val];
     });
+  }
+
+  // 返回实体的字段数组
+  getColList(entity) {
+    return this.getColValList(entity).map((pair) => pair[0]);
   }
 
   // 返回实体的值数组
@@ -36,37 +38,39 @@ class BaseApi {
 
   insertOne(entity) {
     const valueList = this.getValueList(entity);
-    const sql = `insert into "${this.table}" (${this.columns.join()}) values (${valueList.join()});`;
-    return db.query(sql);
+    const sql = `insert into "${this.table}" (${this.columns.join()}) values (${getPosListStr(1, valueList.length)});`;
+    return db.query(sql, valueList);
   }
 
   insertMany(entities) {
-    const valueLists = entities.map((entity) => {
-      return `(${this.getValueList(entity).join()})`;
-    });
-    const sql = `insert into "${this.table}" (${this.columns.join()}) values ${valueLists.join()};`;
-    return db.query(sql);
+    const len = this.getValueList(entities[0]).length;
+    const allValues = entities.map((entity) => this.getValueList(entity)).flat();
+    const posListStr = entities.map((entity, i) => `(${getPosListStr(i * len + 1, len)})`).join(', ');
+    const sql = `insert into "${this.table}" (${this.columns.join()}) values ${posListStr};`;
+    return db.query(sql, allValues);
   }
 
   deleteOne(id) {
-    const sql = `delete from "${this.table}" where id = ${id}`;
-    return db.query(sql);
+    const sql = `delete from "${this.table}" where id = $1`;
+    return db.query(sql, [id]);
   }
 
   deleteMany(ids) {
-    const sql = `delete from "${this.table}" where id in (${ids.join()})`;
-    return db.query(sql);
+    const sql = `delete from "${this.table}" where id in (${getPosListStr(1, ids.length)})`;
+    return db.query(sql, ids);
   }
 
   updateOne(entity, id) {
-    const setSql = this.getColValList(entity)
-      .filter((pair) => pair[0] !== 'create_time')
+    let count = 0;
+    const colValList = this.getColValList(entity).filter((pair) => pair[0] !== 'create_time');
+    const setSql = colValList
       .map((pair) => {
-        return `${pair[0]} = ${pair[1]}`;
+        count++;
+        return `${pair[0]} = $${count}`;
       })
       .join();
-    const sql = `update "${this.table}" set ${setSql} where id = ${id}`;
-    return db.query(sql);
+    const sql = `update "${this.table}" set ${setSql} where id = $${count + 1}`;
+    return db.query(sql, [...colValList.map(pair => pair[1]), id]);
   }
 
   async updateMany(entities) {
@@ -77,7 +81,7 @@ class BaseApi {
 
   // 查询所有结果
   list(columns = this.columns) {
-    const sql = `select ${this.columnsWithId.join()} from "${this.table}"`;
+    const sql = `select ${columns.join()} from "${this.table}"`;
     return db.query(sql);
   }
 
@@ -86,6 +90,7 @@ class BaseApi {
     // page-页数，size-每页显示数量，sorted-排序字段，order-升序/降序，query-查询条件
     const { page = 1, size = 8, sorted, order = "asc", query } = filter;
     camelToUnderline(query);
+    let count = 1, allValues = [];
     const querySql = this.columnsWithId.map((col) => {
       const condition = query[col];
       if (condition === void 0 || condition === null) return;
@@ -95,24 +100,32 @@ class BaseApi {
           return;
         }
         case 0: {
-          return `${col} = ${condition}`;
+          allValues.push(condition);
+          return `${col} = $${count++}`;
         }
         case 1: {
-          return `${col} like '%${condition}%'`
+          allValues.push(`%${condition}%`);
+          return `${col} like $${count++}`
         }
         case 2: {
           let sqlList = [];
           const { start, end } = condition;
           if (start) {
-            sqlList.push(`${col} > ${start}`);
+            allValues.push(start);
+            sqlList.push(`${col} > $${count++}`);
           }
           if (end) {
-            sqlList.push(`${col} < ${end}`);
+            allValues.push(end);
+            sqlList.push(`${col} < $${count++}`);
           }
           return sqlList.join(" and ");
         }
         case 3: {
-          return `col in (${condition.join()})`;
+          const len = condition.length;
+          allValues = allValues.concat(condition);
+          const sql = `col in (${getPosListStr(count, len)})`;
+          count += len;
+          return sql;
         }
       }
     })
@@ -120,11 +133,12 @@ class BaseApi {
     .join(' and ');
     let sql = `select ${columns.join()} from "${this.table}"`;
     if (querySql) sql += ` where ${querySql}`;
-    if (sorted && this.columnsWithId.includes(sorted)) {
+    if (sorted && this.columnsWithId.includes(sorted) && /asc|desc/.test(order)) {
       sql += ` order by ${sorted} ${order}`;
     }
-    sql += ` limit ${(page - 1) * size}, ${size}`;
-    return db.query(sql);
+    sql += ` limit $${count++}, $${count++}`;
+    allValues.push((page - 1) * size, size);
+    return db.query(sql, allValues);
   }
 }
 

@@ -21,7 +21,22 @@ function underlineToPascal(str) {
   return str[0].toUpperCase() + str.slice(1);
 }
 
+// 得到预编译位置参数序列 $3, $4 ,$5
+function getPosListStr(start, num) {
+  return new Array(num).fill(0).map((x, i) => {
+    return `$${start + i}`;
+  }).join(', ');
+}
+
+// 获得当前时间字符串 2023-01-20 00:00:00
+function getCurTime() {
+  const cur = new Date();
+  return `${cur.getFullYear()}-${cur.getMonth() + 1}-${cur.getDate()} ${cur.getHours()}:${cur.getMinutes()}:${cur.getSeconds()}`;
+}
+
 module.exports = {
   camelToUnderline,
-  underlineToPascal
+  underlineToPascal,
+  getPosListStr,
+  getCurTime
 };
