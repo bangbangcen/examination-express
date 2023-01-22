@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('express-async-errors');
 
+const { ipIntercept, limiter } = require('./ip-intercept');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const relationshipRouter = require('./routes/relationship');
@@ -19,8 +20,10 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
 app.use(cors());
+app.use(ipIntercept); // 拦截黑名单内的ip，防止ddos攻击
+app.use(limiter); //访问频率限制
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
