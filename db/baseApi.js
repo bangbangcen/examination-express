@@ -1,6 +1,6 @@
 const db = require("./connector");
 const { COLUMNS, COLUMN_QUERY_TYPE } = require("./constants");
-const { camelToUnderline, underlineToPascal, getPosListStr, getCurTime } = require("../util");
+const { camelToUnderline, underlineToPascal, underlineToCamel, getPosListStr, getCurTime } = require("../util");
 
 // 将常用单表sql封装成api，传入参数可自动拼接生成sql
 class BaseApi {
@@ -80,9 +80,11 @@ class BaseApi {
   }
 
   // 查询所有结果
-  list(columns = this.columns) {
+  async list(columns = this.columnsWithId) {
     const sql = `select ${columns.join()} from "${this.table}"`;
-    return db.query(sql);
+    let result = await db.query(sql);
+    underlineToCamel(result.rows);
+    return result;
   }
 
   // 分页 + 条件过滤

@@ -13,6 +13,8 @@ const relationshipRouter = require('./routes/relationship');
 const packageRouter = require('./routes/package');
 const adminRouter = require('./routes/admin');
 const assignment = require('./routes/assignment');
+const permission = require('./routes/permission');
+const role = require('./routes/role');
 
 const app = express();
 
@@ -35,6 +37,8 @@ app.use('/relationship', relationshipRouter);
 app.use('/package', packageRouter)
 app.use('/admin', adminRouter);
 app.use('/assignment', assignment);
+app.use('/permission', permission);
+app.use('/role', role);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

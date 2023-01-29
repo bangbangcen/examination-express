@@ -15,6 +15,23 @@ function camelToUnderline(objs) {
   else help(objs);
 }
 
+// 对象的所有属性由下划线命名转为驼峰命名
+function underlineToCamel(objs) {
+  function help(entity) {
+    Object.keys(entity).forEach(prop => {
+      const newProp = prop.replace(/_[a-z]/g, (str) => str[1].toUpperCase());
+      if (newProp !== prop) {
+        entity[newProp] = entity[prop];
+        delete entity[prop];
+      }
+    });    
+  }
+  if (Array.isArray(objs)) {
+    objs.forEach((obj) => help(obj));
+  }
+  else help(objs);
+}
+
 // 下划线命名转为帕斯卡命名
 function underlineToPascal(str) {
   str = str.replace(/_[a-z]/g, (str) => str[1].toUpperCase());
@@ -37,6 +54,7 @@ function getCurTime() {
 module.exports = {
   camelToUnderline,
   underlineToPascal,
+  underlineToCamel,
   getPosListStr,
   getCurTime
 };
