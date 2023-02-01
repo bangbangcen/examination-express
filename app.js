@@ -7,6 +7,7 @@ const logger = require('morgan');
 require('express-async-errors');
 
 const { ipIntercept, limiter } = require('./ip-intercept');
+const { validateAuth } = require('./auth');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const relationshipRouter = require('./routes/relationship');
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(validateAuth); //通过token验证用户是否有权访问，同时提取id
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);

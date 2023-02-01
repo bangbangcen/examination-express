@@ -1,4 +1,4 @@
-// 对象的所有属性由驼峰命名转为下划线命名
+// 对象的所有属性由小驼峰命名转为下划线命名
 function camelToUnderline(objs) {
   function help(entity) {
     Object.keys(entity).forEach(prop => {
@@ -15,7 +15,7 @@ function camelToUnderline(objs) {
   else help(objs);
 }
 
-// 对象的所有属性由下划线命名转为驼峰命名
+// 对象的所有属性由下划线命名转为小驼峰命名
 function underlineToCamel(objs) {
   function help(entity) {
     Object.keys(entity).forEach(prop => {
@@ -30,6 +30,7 @@ function underlineToCamel(objs) {
     objs.forEach((obj) => help(obj));
   }
   else help(objs);
+  return objs;
 }
 
 // 下划线命名转为帕斯卡命名

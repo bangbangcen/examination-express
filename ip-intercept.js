@@ -16,7 +16,6 @@ function ipIntercept(req, res, next) {
   const ip = req.ip;
   if (blackList[ip]) {
     const wait = parseInt((blackList[ip] + 3 * 60 * 1000 - Date.now()) / 1000);
-    console.log(blackList[ip], wait)
     if (wait > 0) {
       res.status(403);
       res.send({ message: `您的账户还需要${parseInt(wait / 60)}分${parseInt(wait % 60)}秒才能解冻。` });
