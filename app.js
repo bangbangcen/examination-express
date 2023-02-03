@@ -16,6 +16,7 @@ const adminRouter = require('./routes/admin');
 const assignment = require('./routes/assignment');
 const permission = require('./routes/permission');
 const role = require('./routes/role');
+const examination_center = require('./routes/examination_center');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/admin', adminRouter);
 app.use('/assignment', assignment);
 app.use('/permission', permission);
 app.use('/role', role);
+app.use('/examination_center', examination_center);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
