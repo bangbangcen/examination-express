@@ -19,6 +19,7 @@ const role = require('./routes/role');
 const examination_center = require('./routes/examination_center');
 const department_doctor = require('./routes/department_doctor');
 const examination_order = require('./routes/examination_order');
+const category = require('./routes/category');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/role', role);
 app.use('/examination_center', examination_center);
 app.use('/department_doctor', department_doctor);
 app.use('/examination_order', examination_order);
+app.use('/category', category);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
