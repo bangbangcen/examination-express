@@ -25,4 +25,9 @@ router.post("/update", async function (req, res) {
   res.send({ message: "修改成功" });
 });
 
+router.get("/listByRole/:roleId", async function (req, res) {
+  console.log(req.params.roleId)
+  const result = await db.query("select * from permission, role_permission where permission.id = role_permission.permission_id and role_permission.role_id = $1", [req.params.roleId]);
+  res.send(result.rows);
+});
 module.exports = router;

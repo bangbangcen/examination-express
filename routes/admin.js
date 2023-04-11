@@ -5,8 +5,8 @@ const { underlineToCamel } = require("../util");
 const { Admin } = require("../db/baseApi");
 
 router.post("/newAdmin", async function (req, res) {
-  const { name, phone, roleId, password } = req.body;
-  await Admin.insertOne({ name, phone, roleId, password });
+  const { name, phone, newRoleId, password } = req.body;
+  await Admin.insertOne({ name, phone, roleId: newRoleId, password });
   res.send();
 });
 
@@ -20,7 +20,7 @@ router.post("/page", async function (req, res) {
   const totalRes = await db.query(sqlTotal);
   res.send({
     rows: underlineToCamel(result.rows),
-    total: totalRes.rows[0].count.charCodeAt() - '0'.charCodeAt(),
+    total: parseInt(totalRes.rows[0].count),
   });
 });
 

@@ -47,6 +47,7 @@ class BaseApi {
     const allValues = entities.map((entity) => this.getValueList(entity)).flat();
     const posListStr = entities.map((entity, i) => `(${getPosListStr(i * len + 1, len)})`).join(', ');
     const sql = `insert into "${this.table}" (${this.columns.join()}) values ${posListStr};`;
+    console.log(sql, allValues);
     return db.query(sql, allValues);
   }
 
