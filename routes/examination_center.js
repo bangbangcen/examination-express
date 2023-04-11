@@ -11,7 +11,7 @@ router.post("/list", async (req, res) => {
               join district b 
               on a.district_id=b.id
               limit $1 , $2`;
-  let result = await db.query(sql,[(curPage-1)*5,curPage*5]);
+  let result = await db.query(sql,[(curPage-1)*5,5]);
   res.send(result.rows);
 });
 
