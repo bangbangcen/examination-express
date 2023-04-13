@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connector');
 const { ExaminatinOrder } = require('../db/baseApi');
+const { Assignment } = require('../db/baseApi');
 
 router.post("/list", async (req, res) => {
     const {dname} = req.body;
     const sql= `select 
+                    a.id as id,
                     b.name as name,
                     b.phone as phone,
                     c.name as package_name,
@@ -30,4 +32,28 @@ router.post("/list", async (req, res) => {
     let result = await db.query(sql,["%"+dname+"%"]);
     res.send(result.rows);
 });
+
+router.post('/assignment', async (req, res) => {
+    const {order_id} = req.body;
+    const sql=`select distinct
+                    b.id
+               from
+                    assignment a,
+                    category b
+                where
+                    a.order_id=$1 and
+                    b.id=a.category_id        
+    `;
+    let result = await db.query(sql,[order_id]);
+    res.send(result.rows);
+});
+
+router.post('/addCategory', async (req, res) => {
+    const{order_id,name}=req.body;
+    const sql=`select id from category where name=$1`;
+    let category_id = (await db.query(sql,[name])).rows[0].id;
+    await Assignment.insertOne({ id:4,category_id:category_id, order_id:order_id,status:0,is_extra:true });
+    res.send();
+});
+
 module.exports = router;
