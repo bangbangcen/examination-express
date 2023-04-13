@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     const { id, roleId } = underlineToCamel(result.rows[0]);
     const time = Date.now();
     const token = jwt.sign({ id, roleId, time }, SECRET_KEY);
-    res.send({ login: true, message: '登陆成功！', token, roleId });
+    res.send({ login: true, message: '登陆成功！', token, roleId ,id});
   }
 });
 

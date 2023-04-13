@@ -1,7 +1,7 @@
 const COLUMNS = {
   admin: ["name", "phone", "password", "role_id", "create_time"],
   assignment: ["category_id", "order_id", "doctor_id", "status", "is_extra"],
-  category: ["name", "package_id", "average_duration", "price"],
+  category: ["name", "package_id", "average_duration", "price","department_id"],
   department: [ "name", "parent_id", "level", "is_full"],
   department_doctor: ["department_id", "administer_id"],
   district: ["name"],
