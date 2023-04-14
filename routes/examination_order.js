@@ -4,6 +4,7 @@ const db = require('../db/connector');
 const { ExaminatinOrder } = require('../db/baseApi');
 const { Assignment } = require('../db/baseApi');
 
+//按名或电话搜索用户订单信息
 router.post("/list", async (req, res) => {
     const {dname} = req.body;
     const sql= `select 
@@ -33,6 +34,7 @@ router.post("/list", async (req, res) => {
     res.send(result.rows);
 });
 
+//按订单号查询子项目
 router.post('/assignment', async (req, res) => {
     const {order_id} = req.body;
     const sql=`select distinct
@@ -48,6 +50,7 @@ router.post('/assignment', async (req, res) => {
     res.send(result.rows);
 });
 
+//按订单号添加子项目名
 router.post('/addAssignment', async (req, res) => {
     const{order_id,name}=req.body;
     const sql=`select id from category where name=$1`;
@@ -56,6 +59,7 @@ router.post('/addAssignment', async (req, res) => {
     res.send();
 });
 
+//改变体检订单状态
 router.post('/changeStatus', async (req, res) => {
     const{order_id,order_status}=req.body;
     const sql=`update examination_order set status=$1 where id=$2`;
@@ -63,6 +67,7 @@ router.post('/changeStatus', async (req, res) => {
     res.send();
 });
 
+//按订单号添加套餐内子检查项目
 router.post('/newAssignment', async (req, res) => {
     const{order_id}=req.body;
     const sql=`select distinct
