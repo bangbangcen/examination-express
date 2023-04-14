@@ -48,11 +48,40 @@ router.post('/assignment', async (req, res) => {
     res.send(result.rows);
 });
 
-router.post('/addCategory', async (req, res) => {
+router.post('/addAssignment', async (req, res) => {
     const{order_id,name}=req.body;
     const sql=`select id from category where name=$1`;
     let category_id = (await db.query(sql,[name])).rows[0].id;
     await Assignment.insertOne({ id:4,category_id:category_id, order_id:order_id,status:0,is_extra:true });
+    res.send();
+});
+
+router.post('/changeStatus', async (req, res) => {
+    const{order_id,order_status}=req.body;
+    const sql=`update examination_order set status=$1 where id=$2`;
+    await db.query(sql,[order_status,order_id]);
+    res.send();
+});
+
+router.post('/newAssignment', async (req, res) => {
+    const{order_id}=req.body;
+    const sql=`select distinct
+                    b.category_id 
+               from 
+                    examination_order a,
+                    package_category b
+               where 
+                    a.id=$1 and
+                    a.package_id=b.package_id`;
+    let que = (await db.query(sql,[order_id])).rows;
+    var sql2=`insert into assignment (category_id,order_id,status,is_extra) values `;
+    var i=0;
+    console.log(que.length);
+    for(;i<que.length-1;++i){
+        sql2=sql2+`(` + que[i].category_id + `,` + order_id +`,0,false),`;
+    }
+    sql2=sql2+`(` + que[i].category_id+`,`+ order_id+ `,0,false)`;
+    await db.query(sql2);
     res.send();
 });
 
