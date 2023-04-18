@@ -12,7 +12,7 @@
  Target Server Version : 90204
  File Encoding         : 65001
 
- Date: 13/04/2023 13:05:58
+ Date: 18/04/2023 21:35:24
 */
 
 
@@ -341,11 +341,9 @@ COMMENT ON COLUMN "public"."assignment"."is_extra" IS '是否为增检项目';
 -- ----------------------------
 -- Records of assignment
 -- ----------------------------
-INSERT INTO "public"."assignment" VALUES (1, 2, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (3, 3, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (4, 9, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (8, 1, 1, NULL, 0, 't');
-INSERT INTO "public"."assignment" VALUES (9, 4, 1, NULL, 0, 't');
+INSERT INTO "public"."assignment" VALUES (17, 3, 1, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (18, 2, 1, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (19, 9, 1, NULL, 0, 'f');
 
 -- ----------------------------
 -- Table structure for category
@@ -369,21 +367,21 @@ COMMENT ON COLUMN "public"."category"."department_id" IS '科室id';
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO "public"."category" VALUES (0, '多喝热水', 1, NULL, NULL, 1);
-INSERT INTO "public"."category" VALUES (1, '一般检查', 1, NULL, NULL, 25);
-INSERT INTO "public"."category" VALUES (3, '外科检查', 1, NULL, NULL, 19);
-INSERT INTO "public"."category" VALUES (2, '内科检查', 1, NULL, NULL, 2);
-INSERT INTO "public"."category" VALUES (4, '心电图', 1, NULL, NULL, 4);
-INSERT INTO "public"."category" VALUES (5, '耳鼻喉检查', 1, NULL, NULL, 17);
-INSERT INTO "public"."category" VALUES (6, '肝胆脾胰彩超', 1, NULL, NULL, 24);
-INSERT INTO "public"."category" VALUES (7, '眼科检查', 1, NULL, NULL, 16);
-INSERT INTO "public"."category" VALUES (8, '甲状腺超声', 1, NULL, NULL, 24);
-INSERT INTO "public"."category" VALUES (9, '血常规', 1, NULL, NULL, 14);
-INSERT INTO "public"."category" VALUES (11, '肾功能', 1, NULL, NULL, 13);
-INSERT INTO "public"."category" VALUES (10, '尿常规', 1, NULL, NULL, 21);
-INSERT INTO "public"."category" VALUES (12, '糖化血红蛋白', 1, NULL, NULL, 14);
-INSERT INTO "public"."category" VALUES (13, '空腹血糖', 1, NULL, NULL, 14);
-INSERT INTO "public"."category" VALUES (14, '肿瘤12项', 1, NULL, NULL, 14);
+INSERT INTO "public"."category" VALUES (3, '外科检查', 1, 90, NULL, 19);
+INSERT INTO "public"."category" VALUES (5, '耳鼻喉检查', 1, 120, NULL, 17);
+INSERT INTO "public"."category" VALUES (6, '肝胆脾胰彩超', 1, 180, NULL, 24);
+INSERT INTO "public"."category" VALUES (8, '甲状腺超声', 1, 30, NULL, 24);
+INSERT INTO "public"."category" VALUES (10, '尿常规', 1, 0, NULL, 21);
+INSERT INTO "public"."category" VALUES (13, '空腹血糖', 1, 0, NULL, 14);
+INSERT INTO "public"."category" VALUES (14, '肿瘤12项', 1, 0, NULL, 14);
+INSERT INTO "public"."category" VALUES (12, '糖化血红蛋白', 1, 0, NULL, 14);
+INSERT INTO "public"."category" VALUES (9, '血常规', 1, 240, NULL, 14);
+INSERT INTO "public"."category" VALUES (7, '眼科检查', 1, 180, NULL, 16);
+INSERT INTO "public"."category" VALUES (2, '内科检查', 1, 90, NULL, 10);
+INSERT INTO "public"."category" VALUES (4, '心电图', 1, 90, NULL, 9);
+INSERT INTO "public"."category" VALUES (0, '多喝热水', 1, 0, NULL, 1);
+INSERT INTO "public"."category" VALUES (11, '肾功能', 1, 0, NULL, 14);
+INSERT INTO "public"."category" VALUES (1, '一般检查', 1, 9, NULL, 25);
 
 -- ----------------------------
 -- Table structure for department
@@ -394,7 +392,8 @@ CREATE TABLE "public"."department" (
   "name" char(10) COLLATE "pg_catalog"."default" NOT NULL,
   "parent_id" int4 NOT NULL,
   "level" int2 NOT NULL,
-  "is_full" bool
+  "is_full" bool,
+  "queue_length" int4 NOT NULL
 )
 ;
 COMMENT ON COLUMN "public"."department"."name" IS '科室名称';
@@ -405,31 +404,31 @@ COMMENT ON COLUMN "public"."department"."is_full" IS '是否已满';
 -- ----------------------------
 -- Records of department
 -- ----------------------------
-INSERT INTO "public"."department" VALUES (1, '医院    ', 0, 0, NULL);
-INSERT INTO "public"."department" VALUES (2, '内科学 ', 1, 1, NULL);
-INSERT INTO "public"."department" VALUES (3, '外科学 ', 1, 1, NULL);
-INSERT INTO "public"."department" VALUES (4, '医学影像学', 1, 1, NULL);
-INSERT INTO "public"."department" VALUES (5, '其它科室', 1, 1, NULL);
-INSERT INTO "public"."department" VALUES (6, '呼吸内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (7, '消化内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (8, '儿科    ', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (9, '心血管内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (10, '神经内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (11, '内分泌科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (12, '肿瘤科 ', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (13, '肾脏内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (14, '血液内科', 2, 2, NULL);
-INSERT INTO "public"."department" VALUES (15, '口腔科 ', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (16, '眼科    ', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (17, '耳鼻喉科', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (18, '妇科    ', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (19, '普外科 ', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (20, '骨科    ', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (21, '泌尿外科', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (22, '乳腺外科', 3, 2, NULL);
-INSERT INTO "public"."department" VALUES (23, '放射科 ', 4, 2, NULL);
-INSERT INTO "public"."department" VALUES (24, '超声科 ', 4, 2, NULL);
-INSERT INTO "public"."department" VALUES (25, '体检科 ', 5, 2, NULL);
+INSERT INTO "public"."department" VALUES (1, '医院    ', 0, 0, NULL, 0);
+INSERT INTO "public"."department" VALUES (2, '内科学 ', 1, 1, NULL, 0);
+INSERT INTO "public"."department" VALUES (3, '外科学 ', 1, 1, NULL, 0);
+INSERT INTO "public"."department" VALUES (4, '医学影像学', 1, 1, NULL, 0);
+INSERT INTO "public"."department" VALUES (5, '其它科室', 1, 1, NULL, 0);
+INSERT INTO "public"."department" VALUES (6, '呼吸内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (7, '消化内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (8, '儿科    ', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (9, '心血管内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (11, '内分泌科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (13, '肾脏内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (15, '口腔科 ', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (17, '耳鼻喉科', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (18, '妇科    ', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (19, '普外科 ', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (20, '骨科    ', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (21, '泌尿外科', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (22, '乳腺外科', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (23, '放射科 ', 4, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (24, '超声科 ', 4, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (25, '体检科 ', 5, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (16, '眼科        ', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (14, '血液内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (12, '肿瘤科 ', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (10, '神经内科', 2, 2, NULL, 0);
 
 -- ----------------------------
 -- Table structure for department_doctor
@@ -447,7 +446,7 @@ COMMENT ON COLUMN "public"."department_doctor"."administer_id" IS '医生的用�
 -- ----------------------------
 -- Records of department_doctor
 -- ----------------------------
-INSERT INTO "public"."department_doctor" VALUES (1, 1, 64);
+INSERT INTO "public"."department_doctor" VALUES (1, 6, 64);
 
 -- ----------------------------
 -- Table structure for district
@@ -560,7 +559,7 @@ COMMENT ON COLUMN "public"."examination_order"."center_id" IS '所选体检中�
 -- ----------------------------
 -- Records of examination_order
 -- ----------------------------
-INSERT INTO "public"."examination_order" VALUES (1, 1, 3, 0, 1, '2023-04-14', 0, 0, 1);
+INSERT INTO "public"."examination_order" VALUES (1, 1, 3, 1, 1, '2023-04-14', 0, 0, 1);
 
 -- ----------------------------
 -- Table structure for examination_result
@@ -1094,7 +1093,7 @@ SELECT setval('"public"."admin_id_seq"', 70, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."assignment_id_seq"
 OWNED BY "public"."assignment"."id";
-SELECT setval('"public"."assignment_id_seq"', 10, true);
+SELECT setval('"public"."assignment_id_seq"', 20, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1115,7 +1114,7 @@ SELECT setval('"public"."department_doctor_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."department_id_seq"
 OWNED BY "public"."department"."id";
-SELECT setval('"public"."department_id_seq"', 2, false);
+SELECT setval('"public"."department_id_seq"', 4, true);
 
 -- ----------------------------
 -- Alter sequences owned by
