@@ -12,7 +12,7 @@
  Target Server Version : 90204
  File Encoding         : 65001
 
- Date: 18/04/2023 21:35:24
+ Date: 19/04/2023 11:44:56
 */
 
 
@@ -286,7 +286,7 @@ CACHE 1;
 DROP TABLE IF EXISTS "public"."admin";
 CREATE TABLE "public"."admin" (
   "id" int4 NOT NULL DEFAULT nextval('admin_id_seq'::regclass),
-  "name" char(4) COLLATE "pg_catalog"."default" NOT NULL,
+  "name" char(32) COLLATE "pg_catalog"."default" NOT NULL,
   "phone" char(11) COLLATE "pg_catalog"."default" NOT NULL,
   "password" varchar(16) COLLATE "pg_catalog"."default" NOT NULL,
   "role_id" int4 NOT NULL,
@@ -302,22 +302,23 @@ COMMENT ON COLUMN "public"."admin"."create_time" IS '创建时间';
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO "public"."admin" VALUES (3, '李佳晨', '13928483978', '123456', 1, '2023-01-02 18:12:30');
-INSERT INTO "public"."admin" VALUES (4, '赵云贵', '13749828594', '135246', 1, '2023-04-10 12:31:44');
-INSERT INTO "public"."admin" VALUES (5, '王丽', '17849820543', '123123', 1, '2023-03-31 13:48:34');
-INSERT INTO "public"."admin" VALUES (6, '孙思蕊', '16738749385', '142536', 1, '2023-04-07 15:04:41');
-INSERT INTO "public"."admin" VALUES (7, '王富贵', '17839842654', '346456', 1, '2023-04-21 15:05:02');
-INSERT INTO "public"."admin" VALUES (16, '王绥', '17836728473', '135246', 1, '2023-04-10 19:07:41');
-INSERT INTO "public"."admin" VALUES (58, '王德法', '17839826473', '135267', 1, '2023-04-10 19:32:19');
-INSERT INTO "public"."admin" VALUES (59, '武广', '17842626473', '135267', 1, '2023-04-10 19:33:29');
-INSERT INTO "public"."admin" VALUES (60, '崔荟', '17839824325', '111111', 1, '2023-04-11 01:35:05');
-INSERT INTO "public"."admin" VALUES (61, '李存', '17839827384', '123123', 1, '2023-04-11 01:35:44');
-INSERT INTO "public"."admin" VALUES (62, '吴语', '17893827342', '123123', 1, '2023-04-11 01:46:32');
-INSERT INTO "public"."admin" VALUES (64, '医生一', '16728736455', '111111', 1, '2023-04-11 02:28:40');
-INSERT INTO "public"."admin" VALUES (66, '河汉清', '16738728394', '123123', 19, '2023-04-11 02:45:43');
-INSERT INTO "public"."admin" VALUES (67, '王主任', '16738723412', '123123', 20, '2023-04-11 02:54:20');
-INSERT INTO "public"."admin" VALUES (68, '王波', '17839827394', '111111', 21, '2023-04-11 09:53:18');
-INSERT INTO "public"."admin" VALUES (69, '伍慕庭', '13472413472', '123456', 1, '2023-04-11 19:16:21');
+INSERT INTO "public"."admin" VALUES (3, '李佳晨                       ', '13928483978', '123456', 1, '2023-01-02 18:12:30');
+INSERT INTO "public"."admin" VALUES (4, '赵云贵                       ', '13749828594', '135246', 1, '2023-04-10 12:31:44');
+INSERT INTO "public"."admin" VALUES (5, '王丽                          ', '17849820543', '123123', 1, '2023-03-31 13:48:34');
+INSERT INTO "public"."admin" VALUES (6, '孙思蕊                       ', '16738749385', '142536', 1, '2023-04-07 15:04:41');
+INSERT INTO "public"."admin" VALUES (7, '王富贵                       ', '17839842654', '346456', 1, '2023-04-21 15:05:02');
+INSERT INTO "public"."admin" VALUES (16, '王绥                          ', '17836728473', '135246', 1, '2023-04-10 19:07:41');
+INSERT INTO "public"."admin" VALUES (58, '王德法                       ', '17839826473', '135267', 1, '2023-04-10 19:32:19');
+INSERT INTO "public"."admin" VALUES (59, '武广                          ', '17842626473', '135267', 1, '2023-04-10 19:33:29');
+INSERT INTO "public"."admin" VALUES (60, '崔荟                          ', '17839824325', '111111', 1, '2023-04-11 01:35:05');
+INSERT INTO "public"."admin" VALUES (61, '李存                          ', '17839827384', '123123', 1, '2023-04-11 01:35:44');
+INSERT INTO "public"."admin" VALUES (62, '吴语                          ', '17893827342', '123123', 1, '2023-04-11 01:46:32');
+INSERT INTO "public"."admin" VALUES (64, '医生一                       ', '16728736455', '111111', 1, '2023-04-11 02:28:40');
+INSERT INTO "public"."admin" VALUES (66, '河汉清                       ', '16738728394', '123123', 19, '2023-04-11 02:45:43');
+INSERT INTO "public"."admin" VALUES (67, '王主任                       ', '16738723412', '123123', 20, '2023-04-11 02:54:20');
+INSERT INTO "public"."admin" VALUES (68, '王波                          ', '17839827394', '111111', 21, '2023-04-11 09:53:18');
+INSERT INTO "public"."admin" VALUES (69, '伍慕庭                       ', '13472413472', '123456', 1, '2023-04-11 19:16:21');
+INSERT INTO "public"."admin" VALUES (72, '心血管内科一号机        ', '11111111111', '123456', 22, '2023-04-19 11:15:59');
 
 -- ----------------------------
 -- Table structure for assignment
@@ -928,7 +929,16 @@ INSERT INTO "public"."permission" VALUES (12, '分类列表', 3, 2, '/category',
 INSERT INTO "public"."permission" VALUES (4, '订单管理', 0, 1, '/order', '', 'Order', 4);
 INSERT INTO "public"."permission" VALUES (13, '个人订单', 4, 2, '/order', 'Order', NULL, 1);
 INSERT INTO "public"."permission" VALUES (5, '体检机构管理', 0, 1, '/center', 'Center', 'Center', 5);
-INSERT INTO "public"."permission" VALUES (6, '科室管理', 0, 1, '/department', 'Department', 'Department', 6);
+INSERT INTO "public"."permission" VALUES (16, '心血管内科', 6, 2, '/department9', 'Department9', NULL, 2);
+INSERT INTO "public"."permission" VALUES (15, '医生详情', 6, 2, '/department', 'Department', '', 1);
+INSERT INTO "public"."permission" VALUES (6, '科室管理', 0, 1, '/department', '', 'Department', 6);
+INSERT INTO "public"."permission" VALUES (17, '神经内科', 6, 2, '/department10', 'Department10', NULL, 3);
+INSERT INTO "public"."permission" VALUES (18, '血液内科', 6, 2, '/department14', 'Department14', NULL, 4);
+INSERT INTO "public"."permission" VALUES (19, '眼科', 6, 2, '/department16', 'Department16', NULL, 5);
+INSERT INTO "public"."permission" VALUES (20, '耳鼻喉科', 6, 2, '/department17', 'Department17', NULL, 6);
+INSERT INTO "public"."permission" VALUES (21, '普外科', 6, 2, '/department19', 'Department19', NULL, 7);
+INSERT INTO "public"."permission" VALUES (22, '超声科', 6, 2, '/department24', 'Department24', NULL, 8);
+INSERT INTO "public"."permission" VALUES (23, '体检科', 6, 2, '/department25', 'Department25', NULL, 9);
 
 -- ----------------------------
 -- Table structure for queue
@@ -1009,10 +1019,18 @@ COMMENT ON COLUMN "public"."role"."description" IS '角色描述';
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO "public"."role" VALUES (1, '系统管理员', '拥有全部权限');
 INSERT INTO "public"."role" VALUES (19, '前台', '医院前台');
 INSERT INTO "public"."role" VALUES (20, '科室主任', '管理科室的医生');
 INSERT INTO "public"."role" VALUES (21, '业务员', '管理订单');
+INSERT INTO "public"."role" VALUES (22, '心血管内科医生', '做心电图');
+INSERT INTO "public"."role" VALUES (1, '超级管理员', '获得所有权限');
+INSERT INTO "public"."role" VALUES (23, '神经内科医生', '内科检查');
+INSERT INTO "public"."role" VALUES (24, '血液内科医生', '抽血');
+INSERT INTO "public"."role" VALUES (25, '眼科医生', '测视力');
+INSERT INTO "public"."role" VALUES (26, '耳鼻喉科医生', '检查');
+INSERT INTO "public"."role" VALUES (27, '普外科医生', '外科检查');
+INSERT INTO "public"."role" VALUES (28, '超声科医生', '做超声');
+INSERT INTO "public"."role" VALUES (29, '体检科医生', '其它');
 
 -- ----------------------------
 -- Table structure for role_permission
@@ -1051,7 +1069,42 @@ INSERT INTO "public"."role_permission" VALUES (23, 0, 20);
 INSERT INTO "public"."role_permission" VALUES (24, 6, 20);
 INSERT INTO "public"."role_permission" VALUES (25, 0, 21);
 INSERT INTO "public"."role_permission" VALUES (26, 4, 21);
+INSERT INTO "public"."role_permission" VALUES (15, 14, 1);
+INSERT INTO "public"."role_permission" VALUES (28, 15, 1);
+INSERT INTO "public"."role_permission" VALUES (29, 16, 1);
 INSERT INTO "public"."role_permission" VALUES (27, 13, 21);
+INSERT INTO "public"."role_permission" VALUES (30, 17, 1);
+INSERT INTO "public"."role_permission" VALUES (31, 18, 1);
+INSERT INTO "public"."role_permission" VALUES (32, 19, 1);
+INSERT INTO "public"."role_permission" VALUES (33, 20, 1);
+INSERT INTO "public"."role_permission" VALUES (34, 21, 1);
+INSERT INTO "public"."role_permission" VALUES (35, 22, 1);
+INSERT INTO "public"."role_permission" VALUES (36, 23, 1);
+INSERT INTO "public"."role_permission" VALUES (37, 16, 22);
+INSERT INTO "public"."role_permission" VALUES (38, 17, 23);
+INSERT INTO "public"."role_permission" VALUES (39, 18, 24);
+INSERT INTO "public"."role_permission" VALUES (41, 20, 26);
+INSERT INTO "public"."role_permission" VALUES (40, 19, 25);
+INSERT INTO "public"."role_permission" VALUES (42, 21, 27);
+INSERT INTO "public"."role_permission" VALUES (43, 22, 28);
+INSERT INTO "public"."role_permission" VALUES (44, 23, 29);
+INSERT INTO "public"."role_permission" VALUES (45, 15, 20);
+INSERT INTO "public"."role_permission" VALUES (46, 0, 22);
+INSERT INTO "public"."role_permission" VALUES (47, 6, 22);
+INSERT INTO "public"."role_permission" VALUES (48, 0, 23);
+INSERT INTO "public"."role_permission" VALUES (50, 0, 24);
+INSERT INTO "public"."role_permission" VALUES (49, 6, 23);
+INSERT INTO "public"."role_permission" VALUES (51, 6, 24);
+INSERT INTO "public"."role_permission" VALUES (52, 0, 25);
+INSERT INTO "public"."role_permission" VALUES (53, 6, 25);
+INSERT INTO "public"."role_permission" VALUES (54, 0, 26);
+INSERT INTO "public"."role_permission" VALUES (55, 6, 26);
+INSERT INTO "public"."role_permission" VALUES (56, 0, 27);
+INSERT INTO "public"."role_permission" VALUES (57, 6, 27);
+INSERT INTO "public"."role_permission" VALUES (58, 0, 28);
+INSERT INTO "public"."role_permission" VALUES (59, 6, 28);
+INSERT INTO "public"."role_permission" VALUES (60, 0, 29);
+INSERT INTO "public"."role_permission" VALUES (61, 6, 29);
 
 -- ----------------------------
 -- Table structure for user
@@ -1086,14 +1139,14 @@ INSERT INTO "public"."user" VALUES (11, '张雨绮', '230293847123112312', '女'
 -- ----------------------------
 ALTER SEQUENCE "public"."admin_id_seq"
 OWNED BY "public"."admin"."id";
-SELECT setval('"public"."admin_id_seq"', 70, true);
+SELECT setval('"public"."admin_id_seq"', 73, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."assignment_id_seq"
 OWNED BY "public"."assignment"."id";
-SELECT setval('"public"."assignment_id_seq"', 20, true);
+SELECT setval('"public"."assignment_id_seq"', 23, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1226,14 +1279,14 @@ SELECT setval('"public"."result_text_option_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."role_id_seq"
 OWNED BY "public"."role"."id";
-SELECT setval('"public"."role_id_seq"', 22, true);
+SELECT setval('"public"."role_id_seq"', 23, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."role_permit_id_seq"
 OWNED BY "public"."role_permission"."id";
-SELECT setval('"public"."role_permit_id_seq"', 28, true);
+SELECT setval('"public"."role_permit_id_seq"', 29, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1443,3 +1496,9 @@ ALTER TABLE "public"."package_category" ADD CONSTRAINT "package_category_package
 -- ----------------------------
 ALTER TABLE "public"."queue" ADD CONSTRAINT "queue_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."department" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."queue" ADD CONSTRAINT "queue_examinee_id_fkey" FOREIGN KEY ("examinee_id") REFERENCES "public"."examinee" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table role_permission
+-- ----------------------------
+ALTER TABLE "public"."role_permission" ADD CONSTRAINT "role_permission_permission_id_fkey" FOREIGN KEY ("permission_id") REFERENCES "public"."permission" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."role_permission" ADD CONSTRAINT "role_permission_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "public"."role" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
