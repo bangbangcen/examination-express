@@ -60,7 +60,7 @@ const COLUMNS = {
   package: ["name", "price", "applicable_group"],
   package_category: ["package_id", "category_id"],
   permission: ["name", "parent_id", "level", "path", "component", "icon"],
-  queue: ["examinee_id", "department_id", "serial_number","queue_length"],
+  queue: ["department_id","order_id", "serial_number"],
   relationship: ["name"],
   result_text_option: ["text"],
   role: ["name", "description"],

@@ -12,7 +12,7 @@
  Target Server Version : 90204
  File Encoding         : 65001
 
- Date: 19/04/2023 11:44:56
+ Date: 21/04/2023 22:25:41
 */
 
 
@@ -319,6 +319,7 @@ INSERT INTO "public"."admin" VALUES (67, '王主任                       ', '16
 INSERT INTO "public"."admin" VALUES (68, '王波                          ', '17839827394', '111111', 21, '2023-04-11 09:53:18');
 INSERT INTO "public"."admin" VALUES (69, '伍慕庭                       ', '13472413472', '123456', 1, '2023-04-11 19:16:21');
 INSERT INTO "public"."admin" VALUES (72, '心血管内科一号机        ', '11111111111', '123456', 22, '2023-04-19 11:15:59');
+INSERT INTO "public"."admin" VALUES (73, '血液内科一号机           ', '11111111111', '123456', 24, '2023-04-21 18:10:05');
 
 -- ----------------------------
 -- Table structure for assignment
@@ -344,6 +345,7 @@ COMMENT ON COLUMN "public"."assignment"."is_extra" IS '是否为增检项目';
 -- ----------------------------
 INSERT INTO "public"."assignment" VALUES (17, 3, 1, NULL, 0, 'f');
 INSERT INTO "public"."assignment" VALUES (18, 2, 1, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (23, 12, 1, NULL, 0, 't');
 INSERT INTO "public"."assignment" VALUES (19, 9, 1, NULL, 0, 'f');
 
 -- ----------------------------
@@ -708,8 +710,6 @@ INSERT INTO "public"."item" VALUES (42, '结膜', 'text', NULL, 1, .5, 1, 7);
 INSERT INTO "public"."item" VALUES (43, '巩膜', 'text', NULL, 1, .5, 1, 7);
 INSERT INTO "public"."item" VALUES (44, '眼底', 'text', NULL, 1, .5, 1, 7);
 INSERT INTO "public"."item" VALUES (45, '甲状腺超声', 'text', NULL, 2, .5, 1, 8);
-INSERT INTO "public"."item" VALUES (46, 'MCV', 'fl', 4, NULL, .5, 0, 9);
-INSERT INTO "public"."item" VALUES (47, '红细胞比积', '%', 5, NULL, .5, 0, 9);
 INSERT INTO "public"."item" VALUES (48, '血小板', '10^9/L', 6, NULL, .5, 0, 9);
 INSERT INTO "public"."item" VALUES (49, '嗜酸性粒细胞', '%', 7, NULL, .5, 0, 9);
 INSERT INTO "public"."item" VALUES (50, '单核细胞', '%', 8, NULL, .5, 0, 9);
@@ -757,6 +757,8 @@ INSERT INTO "public"."item" VALUES (91, '糖链抗原242测定(CA242)', 'u/ml', 
 INSERT INTO "public"."item" VALUES (92, '糖链抗原15-3测定(CA15-3)', 'u/ml', 37, NULL, .5, 0, 14);
 INSERT INTO "public"."item" VALUES (93, '糖链抗原72-4测定(CA72-4)', 'u/ml', 38, NULL, .5, 0, 14);
 INSERT INTO "public"."item" VALUES (94, '特异生长因子测定(TSGF)', 'u/ml', 39, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (46, 'MCV', 'fl', 4, NULL, .5, 0, 9);
+INSERT INTO "public"."item" VALUES (47, '红细胞比积', '%', 5, NULL, .5, 0, 9);
 
 -- ----------------------------
 -- Table structure for item_option
@@ -946,18 +948,19 @@ INSERT INTO "public"."permission" VALUES (23, '体检科', 6, 2, '/department25'
 DROP TABLE IF EXISTS "public"."queue";
 CREATE TABLE "public"."queue" (
   "id" int4 NOT NULL DEFAULT nextval('queue_id_seq'::regclass),
-  "examinee_id" int4 NOT NULL,
   "department_id" int4 NOT NULL,
-  "serial_number" int2 NOT NULL
+  "serial_number" int2 NOT NULL,
+  "order_id" int4 NOT NULL
 )
 ;
-COMMENT ON COLUMN "public"."queue"."examinee_id" IS '体检人id';
 COMMENT ON COLUMN "public"."queue"."department_id" IS '科室id';
 COMMENT ON COLUMN "public"."queue"."serial_number" IS '序号(表明排队顺序)';
+COMMENT ON COLUMN "public"."queue"."order_id" IS '订单id';
 
 -- ----------------------------
 -- Records of queue
 -- ----------------------------
+INSERT INTO "public"."queue" VALUES (1, 14, 235, 1);
 
 -- ----------------------------
 -- Table structure for relationship
@@ -1139,14 +1142,14 @@ INSERT INTO "public"."user" VALUES (11, '张雨绮', '230293847123112312', '女'
 -- ----------------------------
 ALTER SEQUENCE "public"."admin_id_seq"
 OWNED BY "public"."admin"."id";
-SELECT setval('"public"."admin_id_seq"', 73, true);
+SELECT setval('"public"."admin_id_seq"', 74, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."assignment_id_seq"
 OWNED BY "public"."assignment"."id";
-SELECT setval('"public"."assignment_id_seq"', 23, true);
+SELECT setval('"public"."assignment_id_seq"', 24, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1195,7 +1198,7 @@ SELECT setval('"public"."examination_order_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."examination_result_id_seq"
 OWNED BY "public"."examination_result"."id";
-SELECT setval('"public"."examination_result_id_seq"', 2, false);
+SELECT setval('"public"."examination_result_id_seq"', 2, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1272,7 +1275,7 @@ SELECT setval('"public"."relationship_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."result_text_option_id_seq"
 OWNED BY "public"."result_text_option"."id";
-SELECT setval('"public"."result_text_option_id_seq"', 2, false);
+SELECT setval('"public"."result_text_option_id_seq"', 12, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1495,7 +1498,7 @@ ALTER TABLE "public"."package_category" ADD CONSTRAINT "package_category_package
 -- Foreign Keys structure for table queue
 -- ----------------------------
 ALTER TABLE "public"."queue" ADD CONSTRAINT "queue_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."department" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."queue" ADD CONSTRAINT "queue_examinee_id_fkey" FOREIGN KEY ("examinee_id") REFERENCES "public"."examinee" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."queue" ADD CONSTRAINT "queue_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."examination_order" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table role_permission
