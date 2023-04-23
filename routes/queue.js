@@ -17,5 +17,10 @@ router.post("/examinee_info", async function (req, res) {//获得体检人的姓
         res.send([{name:name,category_id:category_id,order_id:order_id}]);
     }
 });
+router.post("/delete", async function (req, res) {//获得体检人的姓名、检查项目号
+    const {order_id,department_id}=req.body;
+    const sql=`delete from queue where order_id=$1 and department_id=$2`;
+    await db.query(sql,[order_id,department_id]);
+});
 
 module.exports = router;
