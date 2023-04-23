@@ -12,7 +12,7 @@
  Target Server Version : 90204
  File Encoding         : 65001
 
- Date: 21/04/2023 22:25:41
+ Date: 23/04/2023 18:25:52
 */
 
 
@@ -347,6 +347,20 @@ INSERT INTO "public"."assignment" VALUES (17, 3, 1, NULL, 0, 'f');
 INSERT INTO "public"."assignment" VALUES (18, 2, 1, NULL, 0, 'f');
 INSERT INTO "public"."assignment" VALUES (23, 12, 1, NULL, 0, 't');
 INSERT INTO "public"."assignment" VALUES (19, 9, 1, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (24, 2, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (25, 7, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (26, 5, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (27, 4, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (28, 9, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (29, 12, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (30, 13, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (31, 14, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (32, 8, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (33, 10, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (34, 11, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (35, 1, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (36, 3, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (37, 6, 2, NULL, 0, 'f');
 
 -- ----------------------------
 -- Table structure for category
@@ -563,6 +577,7 @@ COMMENT ON COLUMN "public"."examination_order"."center_id" IS '所选体检中�
 -- Records of examination_order
 -- ----------------------------
 INSERT INTO "public"."examination_order" VALUES (1, 1, 3, 1, 1, '2023-04-14', 0, 0, 1);
+INSERT INTO "public"."examination_order" VALUES (2, 2, 1, 1, 1, '2023-04-23', 0, 0, 1);
 
 -- ----------------------------
 -- Table structure for examination_result
@@ -614,6 +629,7 @@ COMMENT ON COLUMN "public"."examinee"."relationship_id" IS '关系id';
 -- Records of examinee
 -- ----------------------------
 INSERT INTO "public"."examinee" VALUES (1, '张雨绮', '230293847123112312', '女', '2011-02-11', '18937829582', '2023-04-12 19:35:28', 11, 1);
+INSERT INTO "public"."examinee" VALUES (2, '王思博', '310112462738193721', '男', '2011-02-12', '13829223132', '2023-04-23 12:06:12', 22, 1);
 
 -- ----------------------------
 -- Table structure for group_information
@@ -745,20 +761,20 @@ INSERT INTO "public"."item" VALUES (79, '肌酐', 'umol/l', 24, NULL, .5, 0, 11)
 INSERT INTO "public"."item" VALUES (80, '尿酸', 'umol/l', 25, NULL, .5, 0, 11);
 INSERT INTO "public"."item" VALUES (81, '糖化血红蛋白', '%', 26, NULL, .5, 0, 12);
 INSERT INTO "public"."item" VALUES (82, '空腹血糖', 'mmol/l', 27, NULL, .5, 0, 13);
-INSERT INTO "public"."item" VALUES (83, '血清β人绒毛膜促性腺激素测定', 'ng/ml', 28, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (84, '癌胚抗原测定定量(CEA)', 'ng/ml', 29, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (85, '甲胎蛋白测定定量(AFP)', 'ng/ml', 30, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (86, '神经元特异烯醇化酶测定(NSE)', 'ng/ml', 31, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (87, '细胞角蛋白19片段测定', 'ng/ml', 32, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (88, '糖链抗原50测定(CA50)', 'u/ml', 33, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (89, '糖链抗原125测定(CA125)', 'u/ml', 34, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (90, '糖链抗原19-9测定(CA19-9)', 'u/ml', 35, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (91, '糖链抗原242测定(CA242)', 'u/ml', 36, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (92, '糖链抗原15-3测定(CA15-3)', 'u/ml', 37, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (93, '糖链抗原72-4测定(CA72-4)', 'u/ml', 38, NULL, .5, 0, 14);
-INSERT INTO "public"."item" VALUES (94, '特异生长因子测定(TSGF)', 'u/ml', 39, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (89, '糖链抗原125测定', 'u/ml', 34, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (90, '糖链抗原19-9测定', 'u/ml', 35, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (91, '糖链抗原242测定', 'u/ml', 36, NULL, .5, 0, 14);
 INSERT INTO "public"."item" VALUES (46, 'MCV', 'fl', 4, NULL, .5, 0, 9);
+INSERT INTO "public"."item" VALUES (92, '糖链抗原15-3测定', 'u/ml', 37, NULL, .5, 0, 14);
 INSERT INTO "public"."item" VALUES (47, '红细胞比积', '%', 5, NULL, .5, 0, 9);
+INSERT INTO "public"."item" VALUES (83, '血清β人绒毛膜促性腺激素', 'ng/ml', 28, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (84, '癌胚抗原测定定量', 'ng/ml', 29, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (85, '甲胎蛋白测定定量', 'ng/ml', 30, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (86, '神经元特异烯醇化酶测定', 'ng/ml', 31, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (87, '细胞角蛋白19片段', 'ng/ml', 32, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (88, '糖链抗原50测定', 'u/ml', 33, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (93, '糖链抗原72-4测定', 'u/ml', 38, NULL, .5, 0, 14);
+INSERT INTO "public"."item" VALUES (94, '特异生长因子测定', 'u/ml', 39, NULL, .5, 0, 14);
 
 -- ----------------------------
 -- Table structure for item_option
@@ -960,7 +976,14 @@ COMMENT ON COLUMN "public"."queue"."order_id" IS '订单id';
 -- ----------------------------
 -- Records of queue
 -- ----------------------------
+INSERT INTO "public"."queue" VALUES (2, 25, 131, 2);
+INSERT INTO "public"."queue" VALUES (3, 24, 131, 2);
+INSERT INTO "public"."queue" VALUES (4, 19, 131, 2);
+INSERT INTO "public"."queue" VALUES (5, 17, 131, 2);
+INSERT INTO "public"."queue" VALUES (6, 16, 131, 2);
 INSERT INTO "public"."queue" VALUES (1, 14, 235, 1);
+INSERT INTO "public"."queue" VALUES (7, 10, 131, 2);
+INSERT INTO "public"."queue" VALUES (8, 9, 131, 2);
 
 -- ----------------------------
 -- Table structure for relationship
@@ -1149,7 +1172,7 @@ SELECT setval('"public"."admin_id_seq"', 74, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."assignment_id_seq"
 OWNED BY "public"."assignment"."id";
-SELECT setval('"public"."assignment_id_seq"', 24, true);
+SELECT setval('"public"."assignment_id_seq"', 38, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1198,7 +1221,7 @@ SELECT setval('"public"."examination_order_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."examination_result_id_seq"
 OWNED BY "public"."examination_result"."id";
-SELECT setval('"public"."examination_result_id_seq"', 2, true);
+SELECT setval('"public"."examination_result_id_seq"', 19, true);
 
 -- ----------------------------
 -- Alter sequences owned by
