@@ -9,6 +9,7 @@ router.post("/list", async (req, res) => {
     const {dname} = req.body;
     const sql= `select 
                     a.id as id,
+                    a.examinee_id as examinee_id,
                     b.name as name,
                     b.phone as phone,
                     c.name as package_name,
@@ -81,7 +82,6 @@ router.post('/newAssignment', async (req, res) => {
     let que = (await db.query(sql,[order_id])).rows;
     var sql2=`insert into assignment (category_id,order_id,status,is_extra) values `;
     var i=0;
-    console.log(que.length);
     for(;i<que.length-1;++i){
         sql2=sql2+`(` + que[i].category_id + `,` + order_id +`,0,false),`;
     }
