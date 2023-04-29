@@ -27,6 +27,7 @@ const COLUMNS = {
     "period",
     "group_information_id",
     "center_id",
+    "breakfast"
   ],
   examination_result: ["result_value", "text_option_id", "assignment_id", "item_id"],
   examinee: [

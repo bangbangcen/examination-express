@@ -12,7 +12,7 @@
  Target Server Version : 90204
  File Encoding         : 65001
 
- Date: 23/04/2023 18:25:52
+ Date: 29/04/2023 22:37:32
 */
 
 
@@ -343,24 +343,20 @@ COMMENT ON COLUMN "public"."assignment"."is_extra" IS '是否为增检项目';
 -- ----------------------------
 -- Records of assignment
 -- ----------------------------
-INSERT INTO "public"."assignment" VALUES (17, 3, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (18, 2, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (23, 12, 1, NULL, 0, 't');
-INSERT INTO "public"."assignment" VALUES (19, 9, 1, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (24, 2, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (25, 7, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (26, 5, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (27, 4, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (28, 9, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (29, 12, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (30, 13, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (31, 14, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (32, 8, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (33, 10, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (34, 11, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (35, 1, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (36, 3, 2, NULL, 0, 'f');
-INSERT INTO "public"."assignment" VALUES (37, 6, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (206, 2, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (207, 7, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (208, 5, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (209, 4, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (210, 9, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (211, 12, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (212, 13, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (213, 14, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (214, 8, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (215, 10, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (216, 11, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (217, 1, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (218, 3, 2, NULL, 0, 'f');
+INSERT INTO "public"."assignment" VALUES (219, 6, 2, NULL, 0, 'f');
 
 -- ----------------------------
 -- Table structure for category
@@ -398,7 +394,7 @@ INSERT INTO "public"."category" VALUES (2, '内科检查', 1, 90, NULL, 10);
 INSERT INTO "public"."category" VALUES (4, '心电图', 1, 90, NULL, 9);
 INSERT INTO "public"."category" VALUES (0, '多喝热水', 1, 0, NULL, 1);
 INSERT INTO "public"."category" VALUES (11, '肾功能', 1, 0, NULL, 14);
-INSERT INTO "public"."category" VALUES (1, '一般检查', 1, 9, NULL, 25);
+INSERT INTO "public"."category" VALUES (1, '一般检查', 1, 90, NULL, 25);
 
 -- ----------------------------
 -- Table structure for department
@@ -429,22 +425,22 @@ INSERT INTO "public"."department" VALUES (5, '其它科室', 1, 1, NULL, 0);
 INSERT INTO "public"."department" VALUES (6, '呼吸内科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (7, '消化内科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (8, '儿科    ', 2, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (9, '心血管内科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (11, '内分泌科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (13, '肾脏内科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (15, '口腔科 ', 3, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (17, '耳鼻喉科', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (18, '妇科    ', 3, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (19, '普外科 ', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (20, '骨科    ', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (21, '泌尿外科', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (22, '乳腺外科', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (23, '放射科 ', 4, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (24, '超声科 ', 4, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (25, '体检科 ', 5, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (16, '眼科        ', 3, 2, NULL, 0);
-INSERT INTO "public"."department" VALUES (14, '血液内科', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (19, '普外科 ', 3, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (12, '肿瘤科 ', 2, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (24, '超声科 ', 4, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (16, '眼科        ', 3, 2, NULL, -720);
+INSERT INTO "public"."department" VALUES (14, '血液内科', 2, 2, NULL, 720);
+INSERT INTO "public"."department" VALUES (17, '耳鼻喉科', 3, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (25, '体检科 ', 5, 2, NULL, 0);
+INSERT INTO "public"."department" VALUES (9, '心血管内科', 2, 2, NULL, 0);
 INSERT INTO "public"."department" VALUES (10, '神经内科', 2, 2, NULL, 0);
 
 -- ----------------------------
@@ -561,23 +557,25 @@ CREATE TABLE "public"."examination_order" (
   "examine_date" date NOT NULL,
   "period" int2 NOT NULL,
   "group_information_id" int4,
-  "center_id" int4 NOT NULL
+  "center_id" int4 NOT NULL,
+  "breakfast" int2 DEFAULT 0
 )
 ;
 COMMENT ON COLUMN "public"."examination_order"."examinee_id" IS '体检人id';
 COMMENT ON COLUMN "public"."examination_order"."package_id" IS '套餐id';
-COMMENT ON COLUMN "public"."examination_order"."status" IS '0-未体检 1-体检中 2-已完成';
+COMMENT ON COLUMN "public"."examination_order"."status" IS '0-未体检 1-体检中 2-暂停中 3用餐中 4-已完成 5-已终止';
 COMMENT ON COLUMN "public"."examination_order"."type" IS '0-团检 1-个人体检';
 COMMENT ON COLUMN "public"."examination_order"."examine_date" IS '预约日期';
 COMMENT ON COLUMN "public"."examination_order"."period" IS '0-上午 1-下午';
 COMMENT ON COLUMN "public"."examination_order"."group_information_id" IS '关联团检信息表id';
 COMMENT ON COLUMN "public"."examination_order"."center_id" IS '所选体检中心id';
+COMMENT ON COLUMN "public"."examination_order"."breakfast" IS '吃饭状态';
 
 -- ----------------------------
 -- Records of examination_order
 -- ----------------------------
-INSERT INTO "public"."examination_order" VALUES (1, 1, 3, 1, 1, '2023-04-14', 0, 0, 1);
-INSERT INTO "public"."examination_order" VALUES (2, 2, 1, 1, 1, '2023-04-23', 0, 0, 1);
+INSERT INTO "public"."examination_order" VALUES (1, 1, 3, 4, 1, '2023-04-29', 0, 0, 1, 0);
+INSERT INTO "public"."examination_order" VALUES (2, 2, 1, 1, 1, '2023-04-29', 0, 0, 1, 0);
 
 -- ----------------------------
 -- Table structure for examination_result
@@ -966,24 +964,19 @@ CREATE TABLE "public"."queue" (
   "id" int4 NOT NULL DEFAULT nextval('queue_id_seq'::regclass),
   "department_id" int4 NOT NULL,
   "serial_number" int2 NOT NULL,
-  "order_id" int4 NOT NULL
+  "order_id" int4 NOT NULL,
+  "time" int4
 )
 ;
 COMMENT ON COLUMN "public"."queue"."department_id" IS '科室id';
 COMMENT ON COLUMN "public"."queue"."serial_number" IS '序号(表明排队顺序)';
 COMMENT ON COLUMN "public"."queue"."order_id" IS '订单id';
+COMMENT ON COLUMN "public"."queue"."time" IS '排队时长';
 
 -- ----------------------------
 -- Records of queue
 -- ----------------------------
-INSERT INTO "public"."queue" VALUES (2, 25, 131, 2);
-INSERT INTO "public"."queue" VALUES (3, 24, 131, 2);
-INSERT INTO "public"."queue" VALUES (4, 19, 131, 2);
-INSERT INTO "public"."queue" VALUES (5, 17, 131, 2);
-INSERT INTO "public"."queue" VALUES (6, 16, 131, 2);
-INSERT INTO "public"."queue" VALUES (1, 14, 235, 1);
-INSERT INTO "public"."queue" VALUES (7, 10, 131, 2);
-INSERT INTO "public"."queue" VALUES (8, 9, 131, 2);
+INSERT INTO "public"."queue" VALUES (38, 14, 3, 2, 240);
 
 -- ----------------------------
 -- Table structure for relationship
@@ -1028,6 +1021,7 @@ INSERT INTO "public"."result_text_option" VALUES (7, 'neg');
 INSERT INTO "public"."result_text_option" VALUES (8, '透明');
 INSERT INTO "public"."result_text_option" VALUES (9, '未查见');
 INSERT INTO "public"."result_text_option" VALUES (10, '黄色');
+INSERT INTO "public"."result_text_option" VALUES (12, '请输入');
 
 -- ----------------------------
 -- Table structure for role
@@ -1172,7 +1166,7 @@ SELECT setval('"public"."admin_id_seq"', 74, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."assignment_id_seq"
 OWNED BY "public"."assignment"."id";
-SELECT setval('"public"."assignment_id_seq"', 38, true);
+SELECT setval('"public"."assignment_id_seq"', 220, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1221,7 +1215,7 @@ SELECT setval('"public"."examination_order_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."examination_result_id_seq"
 OWNED BY "public"."examination_result"."id";
-SELECT setval('"public"."examination_result_id_seq"', 19, true);
+SELECT setval('"public"."examination_result_id_seq"', 404, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1284,7 +1278,7 @@ SELECT setval('"public"."permit_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."queue_id_seq"
 OWNED BY "public"."queue"."id";
-SELECT setval('"public"."queue_id_seq"', 2, false);
+SELECT setval('"public"."queue_id_seq"', 39, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1298,7 +1292,7 @@ SELECT setval('"public"."relationship_id_seq"', 2, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."result_text_option_id_seq"
 OWNED BY "public"."result_text_option"."id";
-SELECT setval('"public"."result_text_option_id_seq"', 12, true);
+SELECT setval('"public"."result_text_option_id_seq"', 13, true);
 
 -- ----------------------------
 -- Alter sequences owned by

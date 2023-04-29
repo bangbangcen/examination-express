@@ -68,6 +68,26 @@ router.post('/changeStatus', async (req, res) => {
     res.send();
 });
 
+//改变体检订单吃饭情况
+router.post('/changeBreakfast', async (req, res) => {
+    const{examinee_id,breakfast}=req.body;
+    const sql=`select id from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`;
+    const id=(await db.query(sql,[examinee_id])).rows[0].id;
+    const sql2=`update examination_order set breakfast=$1,status=3 where id=$2`;
+    await db.query(sql2,[breakfast,examinee_id]);
+    res.send();
+});
+
+router.post('/changeStatus2', async (req, res) => {
+    const{examinee_id,status}=req.body;
+    const sql=`select id from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`;
+    const id=(await db.query(sql,[examinee_id])).rows[0].id;
+    const sql2=`update examination_order set status=$1 where id=$2`;
+    await db.query(sql2,[status,examinee_id]);
+    res.send();
+});
+
+
 //按订单号添加套餐内子检查项目
 router.post('/newAssignment', async (req, res) => {
     const{order_id}=req.body;
@@ -89,5 +109,42 @@ router.post('/newAssignment', async (req, res) => {
     await db.query(sql2);
     res.send();
 });
+
+router.post("/examinee_info", async (req, res) => {//获取体检人所有信息
+    const {user_id} = req.body;
+    const sql=`select * from examinee where user_id=$1`;
+    let result = await db.query(sql,[user_id]);
+    res.send(result.rows);
+});
+
+router.post("/examinee_status", async (req, res) => {//获取当前订单状态、是否在体检时间内、排哪个科室、估计排多久
+    const {examinee_id} = req.body;
+    const sql=`select * from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`;
+    const tmp=(await db.query(sql,[examinee_id])).rows;
+    if(tmp.length>0){
+        const result=(await db.query(sql,[examinee_id])).rows[0];
+        let status = result.status;//获取当前订单状态
+        let time = ((new Date().getTime())-result.examine_date.getTime())/86400000;
+        let date = false;//获取是否在体检时间内
+        if(time<=1 && time>=0.25){date = true;}
+        if(status==1){
+            const sql2=`select * from queue where order_id=$1`;
+            const result2=(await db.query(sql2,[result.id])).rows[0];
+            let department_id=result2.department_id;//排哪个科室
+            let department_name=(await db.query(`select name from department where id=$1`,[department_id])).rows[0].name;
+            let serial_number=result2.serial_number;//排队序号
+            let dtime=result2.time;//估计排多久
+            let breakfast=result.breakfast;//吃饭状态
+            res.send({order_id:result.id,breakfast:breakfast,status:status,date:date,department_name:department_name,department_id:department_id,serial_number:serial_number,time:dtime});
+        }
+        else{
+            res.send({status:status,date:date});
+        }
+    }
+    else{
+        res.send({status:4});
+    }
+});
+
 
 module.exports = router;

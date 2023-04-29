@@ -12,7 +12,7 @@ router.get('/getByOrder/:id', async function(req, res) {
 
 router.post('/intel', async function(req, res) {
   const {examinee_id}=req.body;
-  const order_id=(await db.query(`select id from examination_order where examinee_id=$1`,[examinee_id])).rows[0].id;
+  const order_id=(await db.query(`select id from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`,[examinee_id])).rows[0].id;
   const category_id=(await db.query(`select category_id from assignment where order_id=$1 and status=0`,[order_id])).rows;
   var age= Math.floor( ( (new Date().getTime()) - (await db.query(`select birthday from examinee where id=$1`,[examinee_id])).rows[0].birthday.getTime() ) /31536000000);
 
@@ -67,6 +67,11 @@ router.post('/intel', async function(req, res) {
     }
     await db.query(`update department set queue_length=$1 where id=$2`,[time,did]);
 
+    //判断是否可以吃饭
+    if(breakfast){
+      await db.query(`update examination_order set breakfast=1 where id=$1`,[order_id]);
+    }
+
 
     //插入排队序列(需判空)
     var q_min=(await db.query(`select serial_number from queue where department_id=$1 order by serial_number asc`,[did])).rows;
@@ -80,7 +85,7 @@ router.post('/intel', async function(req, res) {
 
 
     //department_id、time、number、breakfast
-    res.send({department_id:did,time:time,number:q_num,breakfast:breakfast,order_id:order_id,end:false});
+    res.send({department_id:did,department_name:department_name,time:time,number:q_num,order_id:order_id,end:false});
   }
 });
 
