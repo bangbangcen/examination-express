@@ -32,9 +32,14 @@ router.post("/delete", async function (req, res) {//从队列中删除一项，�
 
 router.post("/alter", async function (req, res) {//改排请求
     const {order_id,department_id}=req.body;
-
-
     res.send();
 });
+
+router.post("/list", async function (req, res) {//改排请求
+    const sql=`select name,queue_length,number from department where id in (9,10,14,16,17,19,24,25) order by id`;
+    let result=await db.query(sql);
+    res.send(result.rows);
+});
+
 
 module.exports = router;

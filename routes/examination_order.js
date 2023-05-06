@@ -133,12 +133,12 @@ router.post("/examinee_status", async (req, res) => {//获取当前订单状态�
             let department_id=result2.department_id;//排哪个科室
             let department_name=(await db.query(`select name from department where id=$1`,[department_id])).rows[0].name;
             let serial_number=result2.serial_number;//排队序号
-            let dtime=result2.time;//估计排多久
+            let dtime=result2.clock_time;//估计排多久
             let breakfast=result.breakfast;//吃饭状态
             res.send({order_id:result.id,breakfast:breakfast,status:status,date:date,department_name:department_name,department_id:department_id,serial_number:serial_number,time:dtime});
         }
         else{
-            res.send({status:status,date:date});
+            res.send({status:status,date:date,order_id:result.id});
         }
     }
     else{

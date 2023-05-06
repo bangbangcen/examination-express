@@ -19,7 +19,13 @@ router.post('/login', async (req, res) => {
     const { id, roleId } = underlineToCamel(result.rows[0]);
     const time = Date.now();
     const token = jwt.sign({ id, roleId, time }, SECRET_KEY);
-    res.send({ login: true, message: '登陆成功！', token, roleId ,id});
+    const sql=`select permission.path 
+          from role_permission,permission,admin 
+          where admin.id=$1 and 
+          admin.role_id=role_permission.role_id and
+          role_permission.permission_id=permission.id`;
+    const path=(await db.query(sql, [result.rows[0].id])).rows[0].path;
+    res.send({ login: true, message: '登陆成功！', token, roleId ,id,path:path});
   }
 });
 

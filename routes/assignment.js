@@ -65,7 +65,7 @@ router.post('/intel', async function(req, res) {
         break;
       }
     }
-    await db.query(`update department set queue_length=$1 where id=$2`,[time,did]);
+    
 
     //判断是否可以吃饭
     if(breakfast){
@@ -81,11 +81,21 @@ router.post('/intel', async function(req, res) {
     var q_num=-1;
     if (age >= 75) { q_num = (q_min + 1) % 9999; }
     else { q_num = (q_max + 2) % 9999; }
-    await db.query(`insert into queue (department_id,serial_number,order_id,time) values ($1,$2,$3,$4)`,[did,q_num,order_id,dtime]);
+
+    var curTime = new Date();
+    var addSeconds = new Date(curTime.setSeconds(curTime.getSeconds() + time - dtime));
+    var Hours = addSeconds.getHours();
+    var Minutes = addSeconds.getMinutes();
+    var Seconds = addSeconds.getSeconds();
+    var s_createtime = Hours + ':' + Minutes + ':' + Seconds;
+    await db.query(`insert into queue (department_id,serial_number,order_id,time,clock_time) values ($1,$2,$3,$4,$5)`,[did,q_num,order_id,dtime,s_createtime]);
+
+
+    await db.query(`update department set queue_length=$1,number=$2 where id=$3`,[time,q_num,did]);
 
 
     //department_id、time、number、breakfast
-    res.send({department_id:did,department_name:department_name,time:time,number:q_num,order_id:order_id,end:false});
+    res.send({department_id:did,time:time,number:q_num,order_id:order_id,end:false});
   }
 });
 
