@@ -45,7 +45,7 @@ app.use('/admin', adminRouter);
 app.use('/assignment', assignment);
 app.use('/permission', permission);
 app.use('/role', role);
-app.use('/examination_center', examination_center);
+app.use('/center', examination_center);
 app.use('/department_doctor', department_doctor);
 app.use('/examination_order', examination_order);
 app.use('/category', category);
