@@ -33,7 +33,7 @@ router.post("/create", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const { name, description, roleId } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   const sql = `update role set name = '${name}', description = '${description}' where id = ${roleId}`;
   const result = await db.query(sql);
   res.send();

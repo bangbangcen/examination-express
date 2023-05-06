@@ -1,8 +1,8 @@
 const COLUMNS = {
   admin: ["name", "phone", "password", "role_id", "create_time"],
   assignment: ["category_id", "order_id", "doctor_id", "status", "is_extra"],
-  category: ["name", "package_id", "average_duration", "price"],
-  department: [ "name", "parent_id", "level", "is_full"],
+  category: ["name", "package_id", "average_duration", "price","department_id"],
+  department: [ "name", "parent_id", "level", "is_full","queue_length"],
   department_doctor: ["department_id", "administer_id"],
   district: ["name"],
   doctor_status: ["doctor_id", "is_busy"],
@@ -27,6 +27,7 @@ const COLUMNS = {
     "period",
     "group_information_id",
     "center_id",
+    "breakfast"
   ],
   examination_result: ["result_value", "text_option_id", "assignment_id", "item_id"],
   examinee: [
@@ -60,7 +61,7 @@ const COLUMNS = {
   package: ["name", "price", "applicable_group"],
   package_category: ["package_id", "category_id"],
   permission: ["name", "parent_id", "level", "path", "component", "icon"],
-  queue: ["examinee_id", "department_id", "serial_number"],
+  queue: ["department_id","order_id", "serial_number","time"],
   relationship: ["name"],
   result_text_option: ["text"],
   role: ["name", "description"],
