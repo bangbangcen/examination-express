@@ -58,7 +58,7 @@ const COLUMNS = {
   ],
   item_option: ["option_id", "item_id"],
   normal_range: ["start", "end"],
-  package: ["name", "price", "applicable_group"],
+  package: ["name", "price", "tag", "is_hot", "image"],
   package_category: ["package_id", "category_id"],
   permission: ["name", "parent_id", "level", "path", "component", "icon"],
   queue: ["department_id","order_id", "serial_number","time"],

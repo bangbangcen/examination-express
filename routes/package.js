@@ -4,7 +4,15 @@ const db = require('../db/connector');
 const { Package } = require('../db/baseApi');
 
 router.get('/list', async function(req, res) {
-    const result = await Package.list();
+    const { isHot, tag } = req.query;
+    let sql = "select * from package";
+    if (isHot) {
+        sql += " where is_hot = true";
+    }
+    if (tag) {
+        sql += ` where tag = '${tag}'`;
+    }
+    const result = await db.query(sql);
     res.send(result.rows);
 });
 
@@ -30,4 +38,20 @@ router.post("/categories", async (req, res) => {
     res.send(arr);
 });
 
+router.get("/categories", async (req, res) => {
+    const { id } = req.query;
+    const sql = `select 
+                    c.name as name
+                from 
+                    package a,
+                    package_category b,
+                    category c
+                where
+                    a.id=$1 and
+                    a.id=b.package_id and
+                    c.id=b.category_id
+                ;`;
+    let result = await db.query(sql,[id]);
+    res.send(result.rows);
+});
 module.exports = router;
