@@ -10,7 +10,7 @@ router.get("/list", async (req, res) => {
 
 router.post("/item", async (req, res) => {
     const {name} = req.body;
-    const sql= `select 
+    const sql= `select
                     b.name
                 from 
                     category a,
