@@ -3,7 +3,7 @@ const SECRET_KEY = "ajskdlfksj2jrk";
 const DURATION = 5 * 60 * 60 * 1000;
 
 function validateAuth(req, res, next) {
-  if (req.url === '/login') {
+  if (req.url === '/login' || req.url === '/userLogin') {
     next();
   }
   else {

@@ -11,12 +11,10 @@ const COLUMNS = {
     "address",
     "nearby",
     "telephone",
-    "announcement",
     "latitude",
     "longitude",
-    "morning_limit",
-    "afternoon_limit",
     "district_id",
+    "operator_id"
   ],
   examination_order: [
     "examinee_id",
@@ -24,10 +22,10 @@ const COLUMNS = {
     "status",
     "type",
     "examine_date",
-    "period",
     "group_information_id",
     "center_id",
-    "breakfast"
+    "phone",
+    "name"
   ],
   examination_result: ["result_value", "text_option_id", "assignment_id", "item_id"],
   examinee: [
@@ -38,7 +36,7 @@ const COLUMNS = {
     "phone",
     "create_time",
     "user_id",
-    "relationship_id",
+    "relation",
   ],
   group_information: [
     "company_name",
@@ -46,6 +44,7 @@ const COLUMNS = {
     "start_time",
     "end_time",
     "number",
+    "package_id"
   ],
   item: [
     "name",

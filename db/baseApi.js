@@ -38,7 +38,7 @@ class BaseApi {
 
   insertOne(entity) {
     const valueList = this.getValueList(entity);
-    const sql = `insert into "${this.table}" (${this.columns.join()}) values (${getPosListStr(1, valueList.length)});`;
+    const sql = `insert into "${this.table}" (${this.columns.join()}) values (${getPosListStr(1, valueList.length)}) returning id;`;
     return db.query(sql, valueList);
   }
 
@@ -71,6 +71,7 @@ class BaseApi {
       })
       .join();
     const sql = `update "${this.table}" set ${setSql} where id = $${count + 1}`;
+    console.log(sql, [...colValList.map(pair => pair[1]), id])
     return db.query(sql, [...colValList.map(pair => pair[1]), id]);
   }
 

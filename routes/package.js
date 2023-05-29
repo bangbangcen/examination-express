@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connector');
-const { Package } = require('../db/baseApi');
+const { PackageCategory } = require('../db/baseApi');
 
 router.get('/list', async function(req, res) {
     const { isHot, tag } = req.query;
@@ -20,7 +20,7 @@ router.get('/list', async function(req, res) {
 router.post("/categories", async (req, res) => {
     const {name} = req.body;
     const sql= `select 
-                    c.name as name
+                    *
                 from 
                     package a,
                     package_category b,
@@ -31,11 +31,7 @@ router.post("/categories", async (req, res) => {
                     c.id=b.category_id
                 ;`
     let result = await db.query(sql,[name]);
-    var arr = [];
-    for(var i=0 ;i<(result.rows).length;++i){
-        arr.push((result.rows)[i].name);
-    }
-    res.send(arr);
+    res.send(result.rows);
 });
 
 router.get("/categories", async (req, res) => {
@@ -53,5 +49,18 @@ router.get("/categories", async (req, res) => {
                 ;`;
     let result = await db.query(sql,[id]);
     res.send(result.rows);
+});
+
+router.get("/categoryList", async (req, res) => {
+    const result = await db.query("select * from category");
+    res.send(result.rows);
+})
+router.post("/changeCategories", async (req, res) => {
+    const { packageId, items } = req.body;
+    await db.query("delete from package_category where package_id = $1", [packageId]);
+    if (items.length) {
+        await PackageCategory.insertMany(items);
+    }
+    res.send();
 });
 module.exports = router;

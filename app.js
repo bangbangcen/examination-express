@@ -23,7 +23,10 @@ const category = require('./routes/category');
 const queue = require('./routes/queue');
 const item = require('./routes/item');
 const examination_result = require('./routes/examination_result');
-
+const examinee = require('./routes/examinee');
+const schedule = require('./routes/schedule');
+const district = require('./routes/district');
+const group_information = require('./routes/group_information');
 
 const app = express();
 
@@ -56,6 +59,10 @@ app.use('/category', category);
 app.use('/queue', queue);
 app.use('/item', item);
 app.use('/examination_result', examination_result);
+app.use('/examinee', examinee);
+app.use('/schedule', schedule);
+app.use('/district', district);
+app.use('/group', group_information);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
