@@ -12,13 +12,17 @@ router.get('/getByOrder/:id', async function(req, res) {
 
 router.post('/intel', async function(req, res) {
   const {examinee_id}=req.body;
+  console.log(examinee_id);
   const order_id=(await db.query(`select id from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`,[examinee_id])).rows[0].id;
   const category_id=(await db.query(`select category_id from assignment where order_id=$1 and status=0`,[order_id])).rows;
   var age= Math.floor( ( (new Date().getTime()) - (await db.query(`select birthday from examinee where id=$1`,[examinee_id])).rows[0].birthday.getTime() ) /31536000000);
 
   //判断制约关系
   var four_two = false, six_ten = false,nine_all=false,breakfast=true;
-  if(category_id.length==0||(category_id.length==1 && category_id[0].category_id==10)){res.send({end:true})}//无项目，体检结束
+  if(category_id.length==0||(category_id.length==1 && category_id[0].category_id==10)){//无项目，体检结束
+    res.send({end:true});
+    await db.query(`update examination_order set status=$1 where id=$2`,[4,order_id]);
+  }
   else{
     for(var i=0;i<category_id.length;++i){
       if (category_id[i].category_id==4) { four_two = true; }//心电图-》内科
@@ -69,7 +73,10 @@ router.post('/intel', async function(req, res) {
 
     //判断是否可以吃饭
     if(breakfast){
-      await db.query(`update examination_order set breakfast=1 where id=$1`,[order_id]);
+      let status=(await db.query(`select breakfast from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`,[examinee_id])).rows[0].breakfast;
+      if(status==0){
+        await db.query(`update examination_order set breakfast=1 where id=$1`,[order_id]);
+      }
     }
 
 

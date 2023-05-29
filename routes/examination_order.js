@@ -71,7 +71,7 @@ router.post('/changeStatus', async (req, res) => {
 //改变体检订单吃饭情况
 router.post('/changeBreakfast', async (req, res) => {
     const{examinee_id,breakfast}=req.body;
-    const sql=`select id from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`;
+    const sql=`select id,breakfast from examination_order where examinee_id=$1 and status in (0,1,2,3,6)`;
     const id=(await db.query(sql,[examinee_id])).rows[0].id;
     const sql2=`update examination_order set breakfast=$1,status=3 where id=$2`;
     await db.query(sql2,[breakfast,examinee_id]);
@@ -142,7 +142,7 @@ router.post("/examinee_status", async (req, res) => {//获取当前订单状态�
         }
     }
     else{
-        res.send({status:4});
+        res.send({status:4,date:true});
     }
 });
 
